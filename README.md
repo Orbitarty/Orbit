@@ -2,6 +2,10 @@
 
 Orbit is a modern React-based city discovery dashboard for exploring global hubs, experiences, and locations. It features an interactive map, curated location cards, and polished detail pages built with Tailwind CSS and shadcn UI.
 
+## Live Product
+
+**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+
 ## Project Description
 
 Orbit is a client-side single-page application built with Vite and TypeScript. It showcases global hubs across categories like coworking, nightlife, art, cafés, hotels, and fitness. The homepage highlights featured locations, category cards, and an interactive map explorer. Each hub has a dedicated detail page with descriptions, services, reviews, and booking prompts.
@@ -60,6 +64,15 @@ Orbit is a client-side single-page application built with Vite and TypeScript. I
 - shadcn UI
 - Lucide icons
 
+## Planned Infrastructure
+
+The current repository contains the frontend experience. A production-grade backend and off-ramp infrastructure would include the following folders and services:
+
+- `server/stripe/` — real payment processing with Stripe, payment intent creation, webhook handling, and secure receipt flow
+- `server/crypto-bridge/` — actual crypto bridge backend to convert payments into blockchain-friendly assets and manage off-ramping
+- `server/rust/` — Rust backend logic for secure transaction signing, performance-sensitive API endpoints, on-chain transaction orchestration, and backend business logic
+- `onchain/` — on-chain transaction execution layer for smart contract interactions, transaction monitoring, event handling, and wallet integration
+
 ## Getting Started
 
 ```bash
@@ -107,3 +120,4 @@ src/
 - The app currently uses static hub data in `src/data/hubs.ts`.
 - `MapExplorer` renders marker popups and navigates to hub detail pages.
 - `src/components/ui` contains shared UI primitives and reusable design elements.
+- The payments and off-ramp flow are currently implemented as frontend UI and browser payment sheet support; the backend Stripe/crypto bridge/Rust/on-chain infrastructure is planned but not included in this repo.
