@@ -50,7 +50,7 @@ const Index = () => {
             className="text-body text-muted-foreground max-w-lg mx-auto"
           >
             Explore hubs, locations, and experiences across 142 cities.
-            Powered by Stellar smart contracts.
+            Pay in any currency and off-ramp to local currency for global bookings.
           </motion.p>
           <SearchBar />
         </div>

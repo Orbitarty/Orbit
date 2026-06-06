@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Star, MapPin, Clock, Phone, Users, CheckCircle } from "lucide-react";
 import { hubs } from "@/data/hubs";
 import Navbar from "@/components/Navbar";
+import PaymentDialog from "@/components/PaymentDialog";
 
 const HubDetail = () => {
   const { slug } = useParams();
@@ -159,15 +160,11 @@ const HubDetail = () => {
             transition={{ delay: 0.25 }}
             className="card-surface text-center space-y-3"
           >
-            <h3 className="text-heading text-foreground text-base">Interested?</h3>
-            <p className="text-body text-muted-foreground text-xs">Book via Stellar smart contract for transparent, trustless transactions.</p>
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.96 }}
-              className="w-full px-4 py-3 rounded-lg bg-primary text-primary-foreground font-medium text-sm"
-            >
-              Book via Stellar
-            </motion.button>
+            <h3 className="text-heading text-foreground text-base">Payment</h3>
+            <p className="text-body text-muted-foreground text-xs">
+              Pay using any currency and off-ramp into the local currency you need to complete bookings worldwide.
+            </p>
+            <PaymentDialog hubName={hub.name} />
           </motion.div>
         </div>
       </div>
