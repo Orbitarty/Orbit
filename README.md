@@ -1,73 +1,106 @@
-# Welcome to your Lovable project
+# Orbit
 
-## Project info
+Orbit is a modern React-based city discovery dashboard for exploring global hubs, experiences, and locations. It features an interactive map, curated location cards, and polished detail pages built with Tailwind CSS and shadcn UI.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Project Description
 
-## How can I edit this code?
+Orbit is a client-side single-page application built with Vite and TypeScript. It showcases global hubs across categories like coworking, nightlife, art, cafés, hotels, and fitness. The homepage highlights featured locations, category cards, and an interactive map explorer. Each hub has a dedicated detail page with descriptions, services, reviews, and booking prompts.
 
-There are several ways of editing your application.
+## Key Features
 
-**Use Lovable**
+- Interactive map explorer with Leaflet markers and popups
+- Featured hub cards and discovery sections
+- Responsive navigation bar with mobile menu
+- Hub detail pages with services, reviews, and booking calls to action
+- Smooth UI animation via Framer Motion
+- Client-side routing with React Router
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## Architecture
 
-Changes made via Lovable will be committed automatically to this repo.
+### Core structure
 
-**Use your preferred IDE**
+- `src/main.tsx` - application entry point that renders the React app
+- `src/App.tsx` - root component with providers and route definitions
+- `src/pages/Index.tsx` - homepage layout, hero, categories, stats, map, and featured hubs
+- `src/pages/HubDetail.tsx` - hub detail page with services, reviews, and sidebar details
+- `src/pages/NotFound.tsx` - fallback route for unmatched URLs
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### UI and components
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- `src/components/` - reusable page components such as `Navbar`, `SearchBar`, `StatsBar`, `CategoryGrid`, `HubCard`, `MapExplorer`, and `CommandPalette`
+- `src/components/ui/` - shared shadcn UI primitives and component building blocks
+- `src/data/hubs.ts` - static hub dataset with location metadata, review content, and map coordinates
 
-Follow these steps:
+### State and navigation
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- `react-router-dom` manages client-side navigation and dynamic routing
+- `@tanstack/react-query` provides app-wide query support and shared provider setup
+- `react-leaflet` renders the interactive world map and markers
+- `framer-motion` handles page and component animations
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### Design and styling
 
-# Step 3: Install the necessary dependencies.
-npm i
+- Tailwind CSS for utility-first styling and responsive layouts
+- `shadcn-ui` style primitives for consistent design patterns
+- `lucide-react` icons for visual accents and interface controls
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+## Tech stack
+
+- Vite
+- React 18
+- TypeScript
+- Tailwind CSS
+- React Router DOM
+- React Query
+- React Leaflet
+- Framer Motion
+- shadcn UI
+- Lucide icons
+
+## Getting Started
+
+```bash
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Open the local development server shown by Vite, typically `http://localhost:5173`.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Available Scripts
 
-**Use GitHub Codespaces**
+- `npm run dev` — start the development server
+- `npm run build` — build the production bundle
+- `npm run preview` — preview the production build locally
+- `npm run lint` — run ESLint
+- `npm run test` — run Vitest tests
+- `npm run test:watch` — run tests in watch mode
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Project Layout
 
-## What technologies are used for this project?
+```
+src/
+  App.tsx
+  main.tsx
+  pages/
+    Index.tsx
+    HubDetail.tsx
+    NotFound.tsx
+  components/
+    Navbar.tsx
+    SearchBar.tsx
+    StatsBar.tsx
+    CategoryGrid.tsx
+    HubCard.tsx
+    MapExplorer.tsx
+    CommandPalette.tsx
+    ui/        # shadcn-style UI primitives
+  data/
+    hubs.ts
+  assets/     # images and static media
+```
 
-This project is built with:
+## Notes
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+- The app currently uses static hub data in `src/data/hubs.ts`.
+- `MapExplorer` renders marker popups and navigates to hub detail pages.
+- `src/components/ui` contains shared UI primitives and reusable design elements.
