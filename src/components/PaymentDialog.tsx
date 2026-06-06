@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -71,6 +71,12 @@ const PaymentDialog = ({ hubName }: { hubName: string }) => {
   const [amount, setAmount] = useState("120");
   const [paymentMethod, setPaymentMethod] = useState(paymentMethods[0]);
   const [status, setStatus] = useState<"idle" | "processing" | "success">("idle");
+  const [supportsPaymentRequest, setSupportsPaymentRequest] = useState(false);
+  const [paymentRequestMessage, setPaymentRequestMessage] = useState("");
+
+  useEffect(() => {
+    setSupportsPaymentRequest(typeof window !== "undefined" && "PaymentRequest" in window);
+  }, []);
 
   const numericAmount = Number(amount) || 0;
   const convertedAmount = useMemo(
@@ -83,6 +89,51 @@ const PaymentDialog = ({ hubName }: { hubName: string }) => {
     setStatus("processing");
     await new Promise((resolve) => setTimeout(resolve, 900));
     setStatus("success");
+  };
+
+  const handleBrowserPayment = async () => {
+    if (!supportsPaymentRequest) {
+      setPaymentRequestMessage("Payment Request API is not supported in this browser.");
+      return;
+    }
+
+    try {
+      setStatus("processing");
+      setPaymentRequestMessage("");
+      const totalAmount = (numericAmount + networkFee).toFixed(2);
+      const request = new PaymentRequest(
+        [
+          {
+            supportedMethods: ["basic-card"],
+            data: {
+              supportedNetworks: ["visa", "mastercard", "amex", "discover"],
+              supportedTypes: ["credit", "debit"],
+            },
+          },
+        ],
+        {
+          displayItems: [
+            { label: `${hubName} booking`, amount: { currency: fromCurrency, value: numericAmount.toFixed(2) } },
+            { label: "Network fee", amount: { currency: fromCurrency, value: networkFee.toFixed(2) } },
+          ],
+          total: { label: "Total", amount: { currency: fromCurrency, value: totalAmount } },
+        },
+        {
+          requestPayerName: true,
+          requestPayerEmail: true,
+        },
+      );
+
+      const response = await request.show();
+      await response.complete("success");
+      setStatus("success");
+      setPaymentRequestMessage("Payment Request completed successfully.");
+    } catch (error) {
+      setStatus("idle");
+      setPaymentRequestMessage(
+        error instanceof Error ? error.message : "Payment was cancelled or failed.",
+      );
+    }
   };
 
   return (
@@ -180,6 +231,16 @@ const PaymentDialog = ({ hubName }: { hubName: string }) => {
               <p className="text-muted-foreground">Receive approximately {formatCurrency(convertedAmount, toCurrency)} in {toCurrency}.</p>
               <p className="text-muted-foreground">Network fee: {formatCurrency(networkFee, fromCurrency)}</p>
             </div>
+
+            {supportsPaymentRequest && (
+              <Button variant="outline" onClick={handleBrowserPayment} className="w-full">
+                Use browser payment sheet
+              </Button>
+            )}
+
+            {paymentRequestMessage && (
+              <p className="text-sm text-muted-foreground">{paymentRequestMessage}</p>
+            )}
 
             <DialogFooter className="gap-2">
               <Button disabled={status === "processing" || numericAmount <= 0} onClick={handleSubmit}>

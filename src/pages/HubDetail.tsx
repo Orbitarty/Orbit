@@ -4,6 +4,7 @@ import { ArrowLeft, Star, MapPin, Clock, Phone, Users, CheckCircle } from "lucid
 import { hubs } from "@/data/hubs";
 import Navbar from "@/components/Navbar";
 import PaymentDialog from "@/components/PaymentDialog";
+import CityLanguageAssistant from "@/components/CityLanguageAssistant";
 
 const HubDetail = () => {
   const { slug } = useParams();
@@ -152,6 +153,15 @@ const HubDetail = () => {
                 <span>{hub.phone}</span>
               </div>
             </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.20 }}
+            className="card-surface"
+          >
+            <CityLanguageAssistant city={hub.city} />
           </motion.div>
 
           <motion.div

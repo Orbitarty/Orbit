@@ -14,7 +14,9 @@ Orbit is a client-side single-page application built with Vite and TypeScript. I
 - Hub detail pages with services, reviews, and booking calls to action
 - Smooth UI animation via Framer Motion
 - Client-side routing with React Router
+- Native browser Payment Request API integration for real payment flow
 - Universal currency payment and off-ramp flow for global bookings
+- Traveler language assistant with local conversation starters and essential city services
 
 ## Architecture
 
