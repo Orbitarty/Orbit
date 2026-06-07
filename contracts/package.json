@@ -1,0 +1,29 @@
+{
+  "name": "orbitcity-contracts",
+  "version": "1.0.0",
+  "description": "OrbitCity smart contracts",
+  "main": "hardhat.config.js",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy:local": "hardhat run scripts/deploy.js --network localhost",
+    "deploy:testnet": "hardhat run scripts/deploy.js --network sepolia",
+    "verify": "hardhat verify --network sepolia",
+    "node": "hardhat node"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.1.0",
+    "@openzeppelin/contracts-upgradeable": "^5.1.0"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@nomicfoundation/hardhat-ethers": "^3.0.8",
+    "hardhat": "^2.22.18",
+    "ethers": "^6.13.4",
+    "chai": "^4.5.0",
+    "mocha": "^11.0.1"
+  },
+  "keywords": ["blockchain", "ethereum", "smart-contracts", "orbitcity"],
+  "author": "OrbitCity Team",
+  "license": "MIT"
+}
